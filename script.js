@@ -45,7 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   fetch('https://randomuser.me/api/?results=15')
     .then(data => {
-      console.log('data: ', data);
       if(data.status === 200) {
         spinner.classList.add('hide');
       }
@@ -99,20 +98,32 @@ document.addEventListener('DOMContentLoaded', () => {
   function onChange() {
     let val = this.value.trim();
     let elasticItems = document.querySelectorAll('.elastic');
+    
     if(val != '') {
       elasticItems.forEach(item => {
         if(item.textContent.toLowerCase().search(val.toLowerCase()) == -1) {
-          item.parentElement.classList.add('hide');          
+          item.parentElement.classList.add('hide');    
+          
         } else {
           item.parentElement.classList.remove('hide');
+
         }
       });
     } else {
       elasticItems.forEach(item => {
         item.parentElement.classList.remove('hide');
+
       });
     }
+
+    let countHide = document.querySelectorAll('table .hide');
+    if(elasticItems.length === countHide.length) {
+      document.querySelector('.matches').textContent = 'Совпадения отсутствуют 😞';
+    } else {
+      document.querySelector('.matches').textContent = '';
+    }
   }
+
 
   const startOnChange = debounce(onChange, 300);
 

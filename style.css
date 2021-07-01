@@ -76,3 +76,10 @@ th, td {
 .hide {
   display: none;
 }
+
+.matches {
+  margin-top: 20px;
+  color: #fff;
+  font-size: 30px;
+  font-weight: 600;
+}
